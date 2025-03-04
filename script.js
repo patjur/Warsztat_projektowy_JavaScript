@@ -10,6 +10,14 @@ function apiListTasks() {
   });
 }
 
+function apiListOperationsForTask(taskId) {
+  return fetch(apihost + "/api/tasks/" + taskId + "/operations", { headers: { Authorization: apikey } }).then(
+    function (resp) {
+      return resp.json();
+    },
+  );
+}
+
 function renderTask(taskId, title, description, status) {
   const section = document.createElement("section");
   section.className = "card mt-5 shadow-sm";
@@ -33,8 +41,19 @@ function renderTask(taskId, title, description, status) {
 
   const headerRightDiv = document.createElement("div");
   headerDiv.appendChild(headerRightDiv);
-
 }
+
+function renderOperation(ul, status, operationId, operationDescription, timeSpent) {
+  const li = document.createElement("li");
+  li.className = "list-group-item d-flex justify-content-between align-items-center";
+  ul.appendChild(li);
+
+  const descriptionDiv = document.createElement("div");
+  descriptionDiv.innerText = operationDescription;
+  li.appendChild(descriptionDiv);
+}
+
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
