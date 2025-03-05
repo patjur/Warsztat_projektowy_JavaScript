@@ -244,8 +244,15 @@ function renderOperation(ul, status, operationId, operationDescription, timeSpen
   }
 }
 
-
-
+function formatTime(total) {
+  const hours = Math.floor(total / 60);
+  const minutes = total % 60;
+  if (hours > 0) {
+    return hours + "h " + minutes + "m";
+  } else {
+    return minutes + "m";
+  }
+}
 
 document.addEventListener("DOMContentLoaded", function () {
   apiListTasks().then(function (response) {
